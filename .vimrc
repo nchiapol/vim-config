@@ -120,7 +120,7 @@ if has("autocmd")
   au BufNewFile,BufRead *.opts setfiletype c
 
   highlight TrailWhitespace ctermbg=red guibg=red
-  autocmd Syntax * syn match TrailWhitespace /\s\+$\| \+\ze\t/
+  autocmd Syntax * syn match TrailWhitespace /\s\+$\| \+\ze\t/ containedin=ALL
 
   " Put these in an autocmd group, so that we can delete them easily.
   augroup vimrcEx
