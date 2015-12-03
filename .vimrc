@@ -108,6 +108,9 @@ set incsearch     " BUT do highlight as you type you search phrase
 set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set laststatus=2    " always show the status line
 
+" add :w!! as 'sudo save'
+cmap w!! w !sudo tee % >/dev/null
+
 
 " Only do this part when compiled with support for autocommands.
 if has("autocmd")
