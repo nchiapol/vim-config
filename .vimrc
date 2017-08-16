@@ -141,9 +141,11 @@ else
 endif " has("autocmd")
 
 source ~/.vim/syntastic.vimrc
+source ~/.vim/airline.vimrc
 
 ":fixdel
 ":if &term == "xterm"
 ":  set t_kb=^V<BS>
 ":  fixdel
 ":endif
+
