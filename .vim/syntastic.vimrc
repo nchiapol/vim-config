@@ -10,7 +10,7 @@ let g:syntastic_check_on_open = 0
 "" Display checker-name for that error-message
 let g:syntastic_aggregate_errors = 1
 
-let g:syntastic_python_checkers = ['pylint', 'python', 'pep8', 'pyflakes']
+let g:syntastic_python_checkers = ['pep8'] " ['pylint', 'python', 'pep8', 'pyflakes']
 
 "" easy switching of python version
 function Py2()
