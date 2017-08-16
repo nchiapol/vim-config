@@ -140,6 +140,8 @@ else
 
 endif " has("autocmd")
 
+source ~/.vim/syntastic.vimrc
+
 ":fixdel
 ":if &term == "xterm"
 ":  set t_kb=^V<BS>
