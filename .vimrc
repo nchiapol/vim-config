@@ -134,6 +134,9 @@ if has("autocmd")
 
   augroup END
 
+  " needed for ~/.vim/after/syntax/markdown.vim
+  autocmd OptionSet background if exists("g:syntax_on") | syntax on | endif
+
 else
 
   set autoindent		" always set autoindenting on
