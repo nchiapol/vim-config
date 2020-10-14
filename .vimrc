@@ -46,18 +46,89 @@ set showcmd		        " display incomplete commands
 set cmdheight=2         " the command bar is 2 high
 set number              " turn on line numbers
 set lz                  " do not redraw while running macros (much faster) (LazyRedraw)
-set hid                 " you can change buffer without saving
+set hidden              " you can change buffer without saving
 set backspace=2         " make backspace work normal
 set whichwrap+=<,>,h,l  " backspace and cursor keys wrap to
-" set mouse=a             " use mouse everywhere
-set shortmess=atI       " shortens messages to avoid 'press a key' prompt 
+"set mouse=a             " use mouse everywhere
+set shortmess=atI       " shortens messages to avoid 'press a key' prompt
 set report=0            " tell us when anything is changed via :...
 set noerrorbells        " don't make noise
-set softtabstop=4       " pressing tab indents by 2 columns 
-set shiftwidth=4        " automtic indent is 2 columns 
-set tabstop=4           " \t is displayed as 2 spaces
+set softtabstop=4       " pressing tab indents by 4 columns
+set shiftwidth=4        " automtic indent is 4 columns
+set tabstop=4           " \t is displayed as 4 spaces
 set expandtab           " replace \t with spaces when saving
-set smartcase          " search is case insensitive
+set ignorecase          " search is case insensitive
+set smartcase           " UNLESS it cointains an uppercase char
+
+" more UI from https://stevelosh.com/blog/2010/09/coming-home-to-vim
+set encoding=utf-8      " set encoding used when displaying
+set scrolloff=3         " scroll offset: leave n lines below/above when scrolling
+set showmode            " show mode at bottom
+"set visualbell          " flash window on errors
+"set cursorline          " underline line with cursor
+set ttyfast             " indicate fast terminal connection
+set relativenumber      " make line-numbers relative to current line
+set undofile            " create .<filename>.un~ to allow undo after close+open
+"set colorcolumn=85      " show ugly colored column
+
+" highlighting
+set showmatch     " show matching brackets
+"set mat=5         " how many tenths of a second to blink matching brackets for
+set hlsearch      " do highlight searched for phrases (cleared with `<leader><space>` see below)
+set incsearch     " BUT do highlight as you type you search phrase
+
+" make the splitters between windows be blank
+set fillchars=vert:\ ,stl:\ ,stlnc:\
+
+" configs statusline
+set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
+set laststatus=2    " always show the status line
+
+
+let mapleader = ","
+" run syntastic checker and focus location list
+nnoremap <leader>C :SyntasticCheck<CR> <C-w>j
+" strip all trailing whitespace
+nnoremap <leader>c :%s/\s\+$//<cr>:let @/=''<CR>
+" split vertically and switch
+nnoremap <leader>w <C-w>v<C-w>l
+" and speed up moves
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
+" clean search highlights (useful if `set hlsearch` is active)
+nnoremap <leader><space> :noh<CR>
+" select pasted content
+nnoremap <leader>v V`]
+" map ,u to undo movement
+nnoremap <leader>u <C-o>
+" markdown titles
+nnoremap <leader>= yypV`]r=o
+nnoremap <leader>- yypV`]r-o
+
+" lets try to use vim the hardcore way
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+inoremap <up> <nop>
+inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
+nnoremap j gj
+nnoremap k gk
+
+" avoid the help-menu
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" add alias for ESC
+inoremap jj <ESC>
+
+" move to the matching bracket with tab
+nnoremap <tab> %
 
 " try to get middleclick paste to work
 set nopaste
@@ -87,18 +158,6 @@ vmap <F7> <Esc>:set paste!<CR>gv
 " configure filename auto-completion
 set wildmode=longest,list:longest,list:full
 
-" make the splitters between windows be blank
-set fillchars=vert:\ ,stl:\ ,stlnc:\
-
-" highlighting
-set showmatch     " show matching brackets
-set mat=5         " how many tenths of a second to blink matching brackets for
-set nohlsearch    " do not highlight searched for phrases
-set incsearch     " BUT do highlight as you type you search phrase
-
-" configs statusline
-set statusline=%F%m%r%h%w\ [FORMAT=%{&ff}]\ [TYPE=%Y]\ [ASCII=\%03.3b]\ [HEX=\%02.2B]\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
-set laststatus=2    " always show the status line
 
 " add :w!! as 'sudo save'
 cmap w!! w !sudo tee % >/dev/null
@@ -134,6 +193,9 @@ if has("autocmd")
 
   augroup END
 
+  " get rid of pydoc preview from jedi-vim
+  autocmd FileType python setlocal completeopt-=preview
+
   " needed for ~/.vim/after/syntax/markdown.vim
   autocmd OptionSet background if exists("g:syntax_on") | syntax on | endif
 
@@ -146,9 +208,20 @@ endif " has("autocmd")
 source ~/.vim/syntastic.vimrc
 source ~/.vim/airline.vimrc
 
+"" configure python-jedi
+" do not list attributes when typing . (too slow to load)
+let g:jedi#popup_on_dot=0
+" do (not) show call hints
+let g:jedi#show_call_signatures=1
+" when jumping to definition use new window
+let g:jedi#use_splits_not_buffers='winwidth'
+
 ":fixdel
 ":if &term == "xterm"
 ":  set t_kb=^V<BS>
 ":  fixdel
 ":endif
+
+highlight Pmenu ctermfg=DarkBlue  ctermbg=LightGrey
+highlight PmenuSel cterm=bold ctermfg=Brown ctermbg=LightGrey
 
