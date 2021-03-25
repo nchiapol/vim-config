@@ -67,7 +67,7 @@ set showmode            " show mode at bottom
 "set visualbell          " flash window on errors
 "set cursorline          " underline line with cursor
 set ttyfast             " indicate fast terminal connection
-set relativenumber      " make line-numbers relative to current line
+"set relativenumber      " make line-numbers relative to current line
 set undofile            " create .<filename>.un~ to allow undo after close+open
 "set colorcolumn=85      " show ugly colored column
 
@@ -112,8 +112,9 @@ nnoremap <up> <nop>
 nnoremap <down> <nop>
 nnoremap <left> <nop>
 nnoremap <right> <nop>
-inoremap <up> <nop>
-inoremap <down> <nop>
+" deactivate arrows even in insert mode (very annoying)
+"inoremap <up> <nop>
+"inoremap <down> <nop>
 "inoremap <left> <nop>
 "inoremap <right> <nop>
 nnoremap j gj
