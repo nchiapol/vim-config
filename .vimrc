@@ -127,6 +127,7 @@ vnoremap <F1> <ESC>
 
 " add alias for ESC
 inoremap jj <ESC>
+inoremap kk <ESC>
 
 " move to the matching bracket with tab
 nnoremap <tab> %
