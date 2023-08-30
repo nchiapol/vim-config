@@ -127,7 +127,8 @@ vnoremap <F1> <ESC>
 
 " add alias for ESC
 inoremap jj <ESC>
-inoremap kk <ESC>
+" kk does happen in german: e.g. Bankkonto, Parkkarte
+" inoremap kk <ESC>
 
 " move to the matching bracket with tab
 nnoremap <tab> %
