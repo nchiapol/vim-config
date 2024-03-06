@@ -92,6 +92,7 @@ nnoremap <leader>C :SyntasticCheck<CR> <C-w>j
 nnoremap <leader>c :%s/\s\+$//<cr>:let @/=''<CR>
 " split vertically and switch
 nnoremap <leader>w <C-w>v<C-w>l
+nnoremap <leader>W <C-w>s<C-w>j
 " and speed up moves
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -149,8 +150,10 @@ else
   vnoremap <MiddleMouse> s<MiddleMouse>
   set pastetoggle=<F7> mouse=rnv
   "choose either one
-  set ttymouse=xterm
-  "set ttymouse=xterm2
+  if !has('nvim')
+    set ttymouse=xterm
+    "set ttymouse=xterm2
+  endif
 endif
 
 "paste toggle
@@ -208,7 +211,6 @@ else
 
 endif " has("autocmd")
 
-source ~/.vim/syntastic.vimrc
 source ~/.vim/airline.vimrc
 
 "" configure python-jedi
