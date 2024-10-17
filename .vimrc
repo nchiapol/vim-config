@@ -134,6 +134,9 @@ inoremap jj <ESC>
 " move to the matching bracket with tab
 nnoremap <tab> %
 
+" with existing selection, let Y copy to clipboard
+vnoremap Y "+y
+
 " try to get middleclick paste to work
 set nopaste
 if has("gui_running")
@@ -164,6 +167,8 @@ vmap <F7> <Esc>:set paste!<CR>gv
 " configure filename auto-completion
 set wildmode=longest,list:longest,list:full
 
+" integrate fzy (requires neovim - and fzy installed)
+nnoremap <leader>e <cmd>lua require'fuzzy-search'.FuzzySearch()<cr>
 
 " add :w!! as 'sudo save'
 cmap w!! w !sudo tee % >/dev/null
@@ -217,7 +222,7 @@ source ~/.vim/airline.vimrc
 " do not list attributes when typing . (too slow to load)
 let g:jedi#popup_on_dot=0
 " do (not) show call hints
-let g:jedi#show_call_signatures=1
+let g:jedi#show_call_signatures=0
 " when jumping to definition use new window
 let g:jedi#use_splits_not_buffers='winwidth'
 
