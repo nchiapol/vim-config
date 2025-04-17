@@ -100,3 +100,6 @@ source ~/.config/nvim/jedi.vimrc
 
 " configure ale
 source ~/.config/nvim/ale.vimrc
+
+" prevent leaking from password files
+source ~/.config/nvim/redact_pass.vimrc
