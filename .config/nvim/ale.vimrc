@@ -1,7 +1,7 @@
 " configure python
 " only use pylint
 let g:ale_linters={
-\ 'python': ['pylint'],
+\ 'python': ['bandit','pylint'],
 \}
 " use my default pylintrc
 let g:ale_python_pylint_options = '--rcfile /home/nchiapol/.config/nvim/ale-linter-conf/pylint'
