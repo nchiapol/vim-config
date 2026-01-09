@@ -62,10 +62,13 @@ vnoremap Y "+y
 set wildmode=longest,list:longest,list:full
 
 " integrate fzy (requires neovim - and fzy installed)
-nnoremap <leader>e <cmd>lua require'fuzzy-search'.FuzzySearch()<cr>
+nnoremap <leader>e <cmd>lua require('fuzzy-search').FuzzySearch()<cr>
 
 " toggle neovim diagnostics
 nnoremap <leader>t <cmd>lua vim.diagnostic.enable(not vim.diagnostic.is_enabled())<cr>
+
+" add which-key extension (deactivated as, never really used)
+"nnoremap <leader>? <cmd>lua require("which-key").setup()<cr>
 
 " create a shortcut for fixing python files
 " this should probably be moved to a file-type specific file
@@ -103,3 +106,7 @@ source ~/.config/nvim/ale.vimrc
 
 " prevent leaking from password files
 source ~/.config/nvim/redact_pass.vimrc
+
+" load indent-blankline (indentation guides)
+lua require("ibl").setup()
+

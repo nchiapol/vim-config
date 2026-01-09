@@ -2,4 +2,4 @@
 max-line-length = 90
 
 [message control]
-disable=no-else-return
+disable=no-else-return,pointless-string-statement
